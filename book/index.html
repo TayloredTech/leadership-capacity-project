@@ -310,10 +310,16 @@
     }
   })();
 
-  // Klaviyo client-side subscribe (public company_id only, no private key in source)
+  // Follow-the-writing email capture.
+  // Posts to a Taylored Health Google Form (no third party, no keys in source).
+  // Submissions land in Rachel's own Google Sheet. Falls back to a prefilled
+  // email to Rachel if the post ever fails, so no signup is lost.
   (function(){
-    var KLAVIYO_COMPANY_ID = "TFujRw";
-    var KLAVIYO_LIST_ID = "RPX7jS"; // Biology of Leadership - Followers
+    // Google Form endpoint (Taylored Health, owned by Rachel). When set, the
+    // email is posted here via a fire-and-forget no-cors request.
+    var FORM_ACTION = "";   // https://docs.google.com/forms/d/e/<FORM_ID>/formResponse
+    var EMAIL_ENTRY = "";   // entry.<FIELD_ID>
+
     var form = document.getElementById('followForm');
     var input = document.getElementById('email');
     var btn = document.getElementById('submitBtn');
@@ -321,6 +327,27 @@
     if(!form) return;
 
     function valid(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+    function mailtoLink(email){
+      return 'mailto:rachel@taylored.health'
+        + '?subject=' + encodeURIComponent('Follow the writing')
+        + '&body=' + encodeURIComponent('Please add me to the list: ' + (email || ''));
+    }
+
+    function showThanks(){
+      var row = form.querySelector('.row');
+      if(row) row.style.display = 'none';
+      msg.textContent = "Thanks, I'll be in touch when there's something worth reading.";
+      msg.className = 'msg ok';
+    }
+
+    function showFallback(email){
+      btn.disabled = false;
+      btn.textContent = 'Keep me posted';
+      msg.innerHTML = 'Almost there. Please <a style="color:var(--gold)" href="'
+        + mailtoLink(email) + '">email Rachel to confirm</a> and I\'ll add you.';
+      msg.className = 'msg err';
+    }
 
     form.addEventListener('submit', function(ev){
       ev.preventDefault();
@@ -333,33 +360,20 @@
         return;
       }
       btn.disabled = true;
-      var original = btn.textContent;
       btn.textContent = 'Sending...';
-      var payload = {
-        data:{
-          type:"subscription",
-          attributes:{ profile:{ data:{ type:"profile", attributes:{ email: email } } } },
-          relationships:{ list:{ data:{ type:"list", id: KLAVIYO_LIST_ID } } }
-        }
-      };
-      fetch("https://a.klaviyo.com/client/subscriptions/?company_id=" + KLAVIYO_COMPANY_ID, {
-        method:"POST",
-        headers:{ "Content-Type":"application/json", "revision":"2024-10-15" },
-        body: JSON.stringify(payload)
-      }).then(function(res){
-        if(res.status === 202 || res.ok){
-          form.querySelector('.row').style.display = 'none';
-          msg.textContent = "You're on the list. I'll be in touch when there's something real to say.";
-          msg.className = 'msg ok';
-        } else {
-          throw new Error('status ' + res.status);
-        }
-      }).catch(function(){
-        btn.disabled = false;
-        btn.textContent = original;
-        msg.innerHTML = 'Something went wrong. Please email <a style="color:var(--gold)" href="mailto:rachel@taylored.health?subject=Follow%20the%20writing">rachel@taylored.health</a> and I\'ll add you.';
-        msg.className = 'msg err';
-      });
+
+      // Form not wired yet: capture via email to Rachel so nothing is lost.
+      if(!FORM_ACTION || !EMAIL_ENTRY){
+        window.location.href = mailtoLink(email);
+        showThanks();
+        return;
+      }
+
+      var data = new FormData();
+      data.append(EMAIL_ENTRY, email);
+      fetch(FORM_ACTION, { method:'POST', mode:'no-cors', body:data })
+        .then(function(){ showThanks(); })
+        .catch(function(){ showFallback(email); });
     });
   })();
 </script>
