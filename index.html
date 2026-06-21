@@ -9,19 +9,24 @@
 <meta property="og:title" content="The Leadership Capacity Project">
 <meta property="og:description" content="A research-led look at how good leaders sustain themselves over time. And an invitation to add your voice.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#f4f1ea">
+<meta property="og:image" content="https://taylored.health/wp-content/uploads/2025/11/Taylored-Health-Executive-Brief.jpg">
+<meta name="theme-color" content="#1e3644">
+<link rel="icon" href="https://taylored.health/wp-content/uploads/2024/02/cropped-Taylored_Icon_Navy_square-192x192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#f4f1ea;
-    --paper-deep:#ece7dc;
-    --ink:#1d1c19;
-    --ink-soft:#4a4843;
-    --ink-faint:#8a857a;
-    --green:#33433a;
-    --rule:#d8d2c4;
+    --paper:#f6f4ef;
+    --paper-deep:#ece6da;
+    --ink:#1e3644;
+    --ink-soft:#46606d;
+    --ink-faint:#8a9aa1;
+    --teal:#284d64;
+    --gold:#b38e5d;
+    --sage:#a2c091;
+    --cream:#f3efe7;
+    --rule:#dcd5c7;
     --measure:34rem;
     --pad: clamp(1.5rem, 6vw, 5rem);
   }
@@ -30,10 +35,10 @@
   body{
     background:var(--paper);
     color:var(--ink);
-    font-family:"Newsreader",Georgia,serif;
+    font-family:"Manrope",system-ui,-apple-system,Segoe UI,sans-serif;
     font-weight:400;
-    line-height:1.55;
-    font-size:clamp(1.05rem,0.95rem + 0.5vw,1.2rem);
+    line-height:1.6;
+    font-size:clamp(1.02rem,0.94rem + 0.4vw,1.15rem);
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
   }
@@ -46,65 +51,78 @@
   .wrap{max-width:64rem;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
   section{padding-top:clamp(5rem,15vh,11rem);padding-bottom:clamp(5rem,15vh,11rem)}
   .eyebrow{
-    font-family:"Inter",system-ui,sans-serif;
+    font-family:"Manrope",sans-serif;
     font-size:.72rem;
-    font-weight:500;
-    letter-spacing:.22em;
+    font-weight:600;
+    letter-spacing:.24em;
     text-transform:uppercase;
-    color:var(--ink-faint);
+    color:var(--gold);
     margin-bottom:2rem;
   }
   .statement{
-    font-weight:300;
-    font-size:clamp(1.9rem,1.2rem + 3.4vw,3.5rem);
-    line-height:1.12;
-    letter-spacing:-0.015em;
+    font-family:"Playfair Display",Georgia,serif;
+    font-weight:400;
+    font-size:clamp(1.9rem,1.2rem + 3.4vw,3.4rem);
+    line-height:1.14;
+    letter-spacing:-0.005em;
     max-width:18em;
+    color:var(--ink);
   }
-  .lead{max-width:var(--measure);color:var(--ink-soft);font-size:1.18em;line-height:1.6}
+  .lead{max-width:var(--measure);color:var(--ink-soft);font-size:1.16em;line-height:1.6}
   .body{max-width:var(--measure);color:var(--ink-soft)}
   .body + .body{margin-top:1.4em}
   .accent{color:var(--ink)}
   hr.rule{border:0;border-top:1px solid var(--rule);max-width:64rem;margin:0 auto}
 
-  /* nav wordmark */
-  .mark{
-    position:fixed;top:clamp(1rem,3vw,2rem);left:var(--pad);z-index:20;
-    font-family:"Inter",sans-serif;font-size:.72rem;font-weight:500;
-    letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);
-    mix-blend-mode:multiply;
-  }
-
   /* hero */
-  .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
-    padding-top:clamp(7rem,18vh,12rem);padding-bottom:clamp(4rem,10vh,8rem)}
+  .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;
+    overflow:hidden;background:var(--ink);color:var(--cream)}
+  .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    object-position:center 28%;z-index:0}
+  .hero-scrim{position:absolute;inset:0;z-index:1;
+    background:linear-gradient(102deg,rgba(18,34,44,.95) 0%,rgba(20,40,52,.82) 40%,rgba(24,52,68,.42) 100%)}
+  .hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;
+    flex:1;width:100%;max-width:64rem;margin:0 auto;
+    padding:clamp(7rem,18vh,12rem) var(--pad) clamp(3rem,8vh,6rem)}
+  .brandmark{position:absolute;top:clamp(1.6rem,4vw,2.6rem);left:var(--pad);z-index:3;
+    height:clamp(26px,4vw,34px);width:auto;filter:brightness(0) invert(1);opacity:.92}
   .hero h1{
-    font-weight:300;
-    font-size:clamp(2.6rem,1.5rem + 5vw,5.4rem);
-    line-height:1.04;
-    letter-spacing:-0.02em;
+    font-family:"Playfair Display",Georgia,serif;
+    font-weight:400;
+    font-size:clamp(2.5rem,1.4rem + 5vw,5.2rem);
+    line-height:1.05;
+    letter-spacing:-0.012em;
     max-width:13em;
+    color:var(--cream);
   }
-  .hero .lead{margin-top:1.8rem;font-size:clamp(1.15rem,1rem + 0.6vw,1.45rem);color:var(--ink-soft);max-width:30rem}
-  .hero .nom{margin-top:1.6rem;max-width:30rem;color:var(--ink-soft)}
+  .hero .eyebrow{color:var(--gold)}
+  .hero .lead{margin-top:1.8rem;font-size:clamp(1.15rem,1rem + 0.6vw,1.45rem);color:#dfe6e6;max-width:30rem}
+  .hero .nom{margin-top:1.6rem;max-width:30rem;color:#c8d3d4}
   .hero .cta-row{margin-top:2.8rem}
-  .scrollcue{margin-top:auto;padding-top:3rem;font-family:"Inter",sans-serif;
-    font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
+  .scrollcue{margin-top:auto;padding-top:3rem;font-family:"Manrope",sans-serif;
+    font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#9fb0b1}
 
   /* button */
   .btn{
     display:inline-flex;align-items:center;gap:.7em;
-    font-family:"Inter",sans-serif;font-size:.82rem;font-weight:500;
+    font-family:"Manrope",sans-serif;font-size:.82rem;font-weight:600;
     letter-spacing:.04em;
-    color:var(--paper);background:var(--green);
+    color:var(--cream);background:var(--ink);
     padding:1.05em 1.7em;border-radius:999px;
     text-decoration:none;
-    transition:transform .4s cubic-bezier(.2,.7,.2,1),background .4s ease;
-    border:1px solid var(--green);
+    transition:transform .4s cubic-bezier(.2,.7,.2,1),background .4s ease,color .4s ease;
+    border:1px solid var(--ink);
   }
-  .btn:hover{background:var(--ink);border-color:var(--ink);transform:translateY(-2px)}
+  .btn:hover{background:var(--gold);border-color:var(--gold);color:var(--ink);transform:translateY(-2px)}
   .btn .arr{transition:transform .4s cubic-bezier(.2,.7,.2,1)}
   .btn:hover .arr{transform:translateX(4px)}
+  .hero .btn{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+  .hero .btn:hover{background:var(--cream);border-color:var(--cream);color:var(--ink)}
+
+  /* full-bleed editorial image bands */
+  .band{margin:0;background:var(--ink)}
+  .band img{display:block;width:100%;height:clamp(20rem,58vh,38rem);
+    object-fit:cover;object-position:center}
 
   /* themes list */
   .themes{margin-top:3rem;max-width:48rem;border-top:1px solid var(--rule)}
@@ -112,61 +130,68 @@
     list-style:none;display:flex;gap:clamp(1rem,4vw,2.6rem);align-items:baseline;
     padding:1.4rem 0;border-bottom:1px solid var(--rule);
   }
-  .themes .num{font-family:"Inter",sans-serif;font-size:.78rem;font-weight:500;
-    letter-spacing:.1em;color:var(--ink-faint);flex:0 0 auto;padding-top:.35em}
-  .themes .txt{font-size:clamp(1.25rem,1rem + 1.1vw,1.75rem);font-weight:300;
-    line-height:1.25;letter-spacing:-0.01em}
-  .pull{margin-top:2.6rem;font-style:italic;color:var(--ink);font-size:1.15em;max-width:30rem}
+  .themes .num{font-family:"Manrope",sans-serif;font-size:.78rem;font-weight:600;
+    letter-spacing:.1em;color:var(--gold);flex:0 0 auto;padding-top:.5em}
+  .themes .txt{font-family:"Playfair Display",Georgia,serif;
+    font-size:clamp(1.25rem,1rem + 1.1vw,1.7rem);font-weight:400;
+    line-height:1.28;letter-spacing:-0.005em}
+  .pull{font-family:"Playfair Display",Georgia,serif;margin-top:2.6rem;font-style:italic;
+    color:var(--ink);font-size:1.3em;line-height:1.4;max-width:30rem}
 
   /* facts row */
   .facts{display:flex;flex-wrap:wrap;gap:clamp(1.5rem,5vw,4rem);margin-top:2.6rem}
-  .fact .k{font-family:"Inter",sans-serif;font-size:.7rem;font-weight:500;
-    letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:.5rem}
-  .fact .v{font-size:1.25rem;font-weight:300}
+  .fact .k{font-family:"Manrope",sans-serif;font-size:.7rem;font-weight:600;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+  .fact .v{font-family:"Playfair Display",Georgia,serif;font-size:1.35rem;font-weight:400}
   .qlink{display:inline-flex;align-items:center;gap:.5em;margin-top:2.6rem;
-    font-family:"Inter",sans-serif;font-size:.85rem;font-weight:500;letter-spacing:.02em;
-    color:var(--green);text-decoration:none;border-bottom:1px solid var(--rule);padding-bottom:.3em}
-  .qlink:hover{border-color:var(--green)}
+    font-family:"Manrope",sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.02em;
+    color:var(--teal);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:.3em}
+  .qlink:hover{color:var(--gold)}
   .qlink .arr{transition:transform .35s ease}
   .qlink:hover .arr{transform:translateX(3px)}
 
   /* note from rachel */
-  .note{background:var(--paper-deep)}
-  .note .statement{font-style:italic;font-size:clamp(1.6rem,1.1rem + 2.4vw,2.7rem)}
-  .sig{margin-top:2.4rem;font-family:"Inter",sans-serif}
-  .sig .name{font-size:.95rem;font-weight:500;letter-spacing:.02em;color:var(--ink)}
-  .sig .role{font-size:.8rem;letter-spacing:.04em;color:var(--ink-faint);margin-top:.3rem}
+  .note{background:var(--ink);color:var(--cream)}
+  .note .eyebrow{color:var(--gold)}
+  .note .statement{font-style:italic;color:var(--cream);
+    font-size:clamp(1.6rem,1.1rem + 2.4vw,2.6rem)}
+  .note .body{color:#c8d3d4}
+  .sig{margin-top:2.4rem;font-family:"Manrope",sans-serif}
+  .sig .name{font-size:.95rem;font-weight:600;letter-spacing:.02em;color:var(--cream)}
+  .sig .role{font-size:.8rem;letter-spacing:.04em;color:var(--gold);margin-top:.3rem}
 
   /* close */
   .close{text-align:left}
   .close .statement{max-width:14em}
   .close .btn{margin-top:2.6rem}
-  .closing-sig{margin-top:3.5rem;font-family:"Inter",sans-serif;font-size:.85rem;
+  .closing-sig{margin-top:3.5rem;font-family:"Manrope",sans-serif;font-size:.85rem;
     line-height:1.7;color:var(--ink-soft)}
-  .closing-sig .who{color:var(--ink);font-weight:500}
-  footer{padding:3rem var(--pad) 4rem;text-align:center;font-family:"Inter",sans-serif;
-    font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+  .closing-sig .who{color:var(--ink);font-weight:600}
+  footer{padding:3.5rem var(--pad) 4rem;text-align:center;font-family:"Manrope",sans-serif}
+  footer img{height:34px;width:auto;opacity:.9;margin-bottom:1.4rem}
+  footer .fline{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
 
-  ::selection{background:var(--green);color:var(--paper)}
+  ::selection{background:var(--ink);color:var(--cream)}
 </style>
 </head>
 <body>
 
-<div class="mark">Taylored Health</div>
-
 <!-- HERO -->
-<header class="hero wrap">
-  <p class="eyebrow reveal">The Leadership Capacity Project</p>
-  <h1 class="reveal">A research-led look at how good leaders sustain themselves over time.</h1>
-  <p class="lead reveal">And an invitation to add your voice.</p>
-  <p class="nom reveal">You've been nominated for the way you lead, with intention, presence and care. Your experience could help shape how the next generation of leaders learns to last.</p>
-  <div class="cta-row reveal">
-    <a class="btn" href="https://calendar.app.google/37cKK6baU2fLqhrYA" target="_blank" rel="noopener">Find a time to talk <span class="arr">&rarr;</span></a>
+<header class="hero">
+  <img class="hero-bg" src="https://taylored.health/wp-content/uploads/2025/10/Taylored-Health-Hero-Elite-Performance-for-Executives.jpg" alt="" fetchpriority="high" decoding="async">
+  <div class="hero-scrim"></div>
+  <img class="brandmark" src="https://taylored.health/wp-content/uploads/2024/02/TAYLORED-HEALTH-AND-TECH-980x303.png" alt="Taylored Health">
+  <div class="hero-inner">
+    <p class="eyebrow reveal">The Leadership Capacity Project</p>
+    <h1 class="reveal">A research-led look at how good leaders sustain themselves over time.</h1>
+    <p class="lead reveal">And an invitation to add your voice.</p>
+    <p class="nom reveal">You've been nominated for the way you lead, with intention, presence and care. Your experience could help shape how the next generation of leaders learns to last.</p>
+    <div class="cta-row reveal">
+      <a class="btn" href="https://calendar.app.google/37cKK6baU2fLqhrYA" target="_blank" rel="noopener">Find a time to talk <span class="arr">&rarr;</span></a>
+    </div>
+    <p class="scrollcue reveal">Scroll</p>
   </div>
-  <p class="scrollcue reveal">Scroll</p>
 </header>
-
-<hr class="rule">
 
 <!-- OVERVIEW -->
 <section class="wrap">
@@ -178,7 +203,10 @@
   </div>
 </section>
 
-<hr class="rule">
+<!-- IMAGE BAND -->
+<figure class="band reveal">
+  <img src="https://taylored.health/wp-content/uploads/2025/10/The-Decision-Moment-Taylored-Health.jpg" alt="A leader in a moment of decision" loading="lazy" decoding="async">
+</figure>
 
 <!-- WHAT THIS PROJECT IS -->
 <section class="wrap">
@@ -210,7 +238,10 @@
   <a class="qlink reveal" href="https://tayloredgroup.notion.site/Leadership-Capacity-Book-Project-Key-Questions-2f50c4b777ff805da4b6c6517a24bf8a" target="_blank" rel="noopener">See the full set of questions beforehand <span class="arr">&rarr;</span></a>
 </section>
 
-<hr class="rule">
+<!-- IMAGE BAND -->
+<figure class="band reveal">
+  <img src="https://taylored.health/wp-content/uploads/2025/11/Taylored-Health-Executive-Brief.jpg" alt="An executive at work" loading="lazy" decoding="async">
+</figure>
 
 <!-- WHY YOUR VOICE MATTERS -->
 <section class="wrap">
@@ -231,8 +262,6 @@
   <p class="body reveal" style="margin-top:2.6rem">Nothing attributed to you will be published without your approval. Your comfort and privacy come first.</p>
 </section>
 
-<hr class="rule">
-
 <!-- NOTE FROM RACHEL -->
 <section class="note">
   <div class="wrap">
@@ -245,8 +274,6 @@
     </div>
   </div>
 </section>
-
-<hr class="rule">
 
 <!-- CLOSE -->
 <section class="wrap close">
@@ -262,7 +289,10 @@
   </div>
 </section>
 
-<footer>Taylored Health &middot; The Leadership Capacity Project</footer>
+<footer>
+  <img src="https://taylored.health/wp-content/uploads/2024/02/TAYLORED-HEALTH-AND-TECH-980x303.png" alt="Taylored Health">
+  <div class="fline">The Leadership Capacity Project</div>
+</footer>
 
 <script>
   (function(){
